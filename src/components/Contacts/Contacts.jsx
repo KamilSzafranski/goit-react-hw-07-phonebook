@@ -1,10 +1,10 @@
-import React from "react";
-import css from "./Contacts.module.css";
+import React from 'react';
+import css from './Contacts.module.css';
 
-import { ContactsItem } from "components/ContactsItem/ContacsItem";
-import { useDispatch, useSelector } from "react-redux";
-import { addFilterAction } from "redux/filters/filters.slice";
-import { selectFileredContacts } from "redux/selector";
+import { ContactsItem } from 'components/ContactsItem/ContacsItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFilterAction } from 'redux/filters/filters.slice';
+import { selectFileredContacts } from 'redux/selector';
 
 export const Contacts = props => {
   const contacts = useSelector(selectFileredContacts);
@@ -33,7 +33,7 @@ export const Contacts = props => {
             <ContactsItem
               key={element.id}
               name={element.name}
-              number={element.number}
+              number={element.phone}
               id={element.id}
             />
           );

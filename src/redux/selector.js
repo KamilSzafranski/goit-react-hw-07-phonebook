@@ -1,6 +1,13 @@
-export const selectFileredContacts = state => {
-  const { phoneBook: contact, filter } = state;
-  return contact.filter(element =>
-    element.name.toLowerCase().startsWith(filter.toLowerCase())
-  );
-};
+import { createSelector } from '@reduxjs/toolkit';
+
+export const selectContacts = state => state.phoneBook.contacts;
+export const selectFilters = state => state.filter;
+export const selectisLoding = state => state.phoneBook.selectisLoding;
+
+export const selectFileredContacts = createSelector(
+  [selectContacts, selectFilters],
+  (phoneBook, filters) =>
+    phoneBook.filter(element =>
+      element.name.toLowerCase().startsWith(filters.toLowerCase())
+    )
+);

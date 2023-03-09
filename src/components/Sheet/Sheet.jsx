@@ -1,11 +1,13 @@
 import React from "react";
 import css from "./Sheet.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addContactAction } from "redux/phoneBook/phoneBook.slice";
+
+import { selectContacts } from "redux/selector";
+import { addContacts } from "redux/phoneBook/phoneBook.thunk";
 
 export const Sheet = props => {
   const dispatch = useDispatch();
-  const contact = useSelector(state => state.phoneBook);
+  const contact = useSelector(selectContacts);
 
   const handleAdd = event => {
     const {
@@ -16,11 +18,11 @@ export const Sheet = props => {
     event.preventDefault();
 
     const nameTaken = contact.some(elements => elements.name === text);
-    const numberTaken = contact.some(elements => elements.number === num);
+    const numberTaken = contact.some(elements => elements.phone === num);
     if (nameTaken && numberTaken) {
       return alert(`${text} is alredy in Phonebook`);
     }
-    dispatch(addContactAction(text, num));
+    dispatch(addContacts({ text, num }));
   };
 
   return (

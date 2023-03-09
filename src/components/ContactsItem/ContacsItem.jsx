@@ -1,15 +1,15 @@
-import React from "react";
-import css from "./ContactsItem.module.css";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { deleteContactAction } from "redux/phoneBook/phoneBook.slice";
+import React from 'react';
+import css from './ContactsItem.module.css';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContacts } from 'redux/phoneBook/phoneBook.thunk';
 
 export const ContactsItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
   const handleDelete = event => {
     event.preventDefault();
-    dispatch(deleteContactAction(id));
+    dispatch(deleteContacts(id));
     alert(`${name} has been deleted `);
   };
 

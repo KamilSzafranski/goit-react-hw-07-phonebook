@@ -3,15 +3,18 @@ import { Sheet } from "./Sheet/Sheet";
 import { Contacts } from "./Contacts/Contacts";
 import css from "./App.module.css";
 import { saveStorage } from "../utils/utils.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectContacts } from "redux/selector";
+import { fetchContacts } from "redux/phoneBook/phoneBook.thunk";
 
 export const App = () => {
-  const contact = useSelector(state => state.phoneBook);
+  const contact = useSelector(selectContacts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (contact?.length) saveStorage("contacts", contact);
-    else saveStorage("contacts", []);
-  }, [contact]);
+    console.log("E");
+    dispatch(fetchContacts());
+  }, []);
 
   return (
     <div className={css.container}>
