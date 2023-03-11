@@ -11,8 +11,6 @@ import {
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import PropTypes from "prop-types";
-
 import { deleteContacts } from "redux/phoneBook/phoneBook.thunk";
 import { selectIdToDelete, selectModal } from "redux/selector";
 import { ModalStatus } from "redux/constant";
