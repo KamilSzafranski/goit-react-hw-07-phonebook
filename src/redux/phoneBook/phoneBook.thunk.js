@@ -1,4 +1,5 @@
 import { createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 const Url = {
   API_URL: "https://6408d0ca2f01352a8a9e3aff.mockapi.io/contacts",
@@ -10,9 +11,8 @@ export const fetchContacts = createAsyncThunk(
     try {
       const response = await fetch(`${Url.API_URL}`);
 
-      if (!response.ok) return response.status;
+      if (!response.ok) return thunkAPI.rejectWithValue(response.status);
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (e) {
       thunkAPI.rejectWithValue(e);
@@ -28,7 +28,8 @@ export const deleteContacts = createAsyncThunk(
         method: "DELETE",
       };
       const response = await fetch(`${Url.API_URL}/${ids}`, options);
-      if (!response.ok) return response.status;
+      if (!response.ok) return thunkAPI.rejectWithValue(response.status);
+
       const data = await response.json();
       return data;
     } catch (e) {
@@ -39,11 +40,12 @@ export const deleteContacts = createAsyncThunk(
 
 export const addContacts = createAsyncThunk(
   "phoneBook/addContacts",
-  async ({ text: name, num: phone }, thunkAPI) => {
+  async ({ text: name, num: phone, email }, thunkAPI) => {
     try {
       const contactToAdd = {
         name,
         phone,
+        email,
       };
       const options = {
         method: "POST",
@@ -53,7 +55,7 @@ export const addContacts = createAsyncThunk(
         },
       };
       const response = await fetch(`${Url.API_URL}`, options);
-      if (!response.ok) return response.status;
+      if (!response.ok) return thunkAPI.rejectWithValue(response.status);
       const data = await response.json();
       return data;
     } catch (e) {

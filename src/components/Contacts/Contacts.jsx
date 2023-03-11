@@ -1,13 +1,11 @@
-import React from 'react';
-import css from './Contacts.module.css';
+import React from "react";
 
-import { ContactsItem } from 'components/ContactsItem/ContacsItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFilterAction } from 'redux/filters/filters.slice';
-import { selectFileredContacts } from 'redux/selector';
+import { useDispatch } from "react-redux";
+import { addFilterAction } from "redux/filters/filters.slice";
+import { Box, Heading, Text, Input, Avatar } from "@chakra-ui/react";
+import { ContactsList } from "components/ContactsList/ContactsList";
 
 export const Contacts = props => {
-  const contacts = useSelector(selectFileredContacts);
   const dispatch = useDispatch();
 
   const handleInput = event => {
@@ -18,27 +16,25 @@ export const Contacts = props => {
   };
 
   return (
-    <div className={css.box}>
-      <h2 className={css.title}>Contacts</h2>
-      <p className={css.description}>Find contacts by name</p>
-      <input
+    <Box boxShadow="base" p="10px" rounded="md">
+      <Heading as="h2" mb="5px">
+        Phonebook
+      </Heading>
+      <Text fontSize="md" fontWeight="700" mb="10px">
+        Find contacts by name
+      </Text>
+      <Input
+        focusBorderColor="#38B2AC"
         type="text"
         name="filter"
         onChange={handleInput}
-        className={css.input}
+        size="md"
+        width="250px"
       />
-      <ul>
-        {contacts.map(element => {
-          return (
-            <ContactsItem
-              key={element.id}
-              name={element.name}
-              number={element.phone}
-              id={element.id}
-            />
-          );
-        })}
-      </ul>
-    </div>
+      <ContactsList />
+      <Text fontSize="xs" pt="10px">
+        * to delete item just click on it
+      </Text>
+    </Box>
   );
 };

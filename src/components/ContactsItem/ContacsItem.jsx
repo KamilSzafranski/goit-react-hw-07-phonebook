@@ -1,26 +1,35 @@
-import React from 'react';
-import css from './ContactsItem.module.css';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { deleteContacts } from 'redux/phoneBook/phoneBook.thunk';
+import React from "react";
 
-export const ContactsItem = ({ name, number, id }) => {
-  const dispatch = useDispatch();
+import PropTypes from "prop-types";
 
+import { ListItem, Divider, Text, useDisclosure } from "@chakra-ui/react";
+import { DeleteAlert } from "components/DeleteAlert/DeleteAlert";
+import { useDispatch } from "react-redux";
+
+export const ContactsItem = ({ name, number, id, email }) => {
   const handleDelete = event => {
+    onOpen();
     event.preventDefault();
-    dispatch(deleteContacts(id));
-    alert(`${name} has been deleted `);
   };
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <li className={css.item}>
-      <span>{name}:</span>
-      <span> {number}</span>
-      <button className={css.deleteBtn} onClick={handleDelete}>
-        Delete
-      </button>
-    </li>
+    <>
+      <DeleteAlert ids={id} handleOpen={isOpen} handleClose={onClose} />
+      <ListItem
+        display="grid"
+        h="50px"
+        gridTemplateColumns="repeat(3, 1fr)"
+        justifyItems="start"
+        alignItems="center"
+        cursor="pointer"
+        onClick={handleDelete}
+      >
+        <Text>{name}:</Text>
+        <Text> {number}</Text>
+        <Text> {email}</Text>
+      </ListItem>
+      <Divider mb="10px" borderColor="#38B2AC" />
+    </>
   );
 };
 
@@ -28,4 +37,5 @@ ContactsItem.propTypes = {
   name: PropTypes.string,
   number: PropTypes.string,
   id: PropTypes.string,
+  email: PropTypes.string,
 };
