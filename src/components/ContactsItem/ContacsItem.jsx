@@ -2,7 +2,7 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import { ListItem, Divider, Text, useDisclosure } from "@chakra-ui/react";
+import { ListItem, Divider, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import {
   openModalAction,

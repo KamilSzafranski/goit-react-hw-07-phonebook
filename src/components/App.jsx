@@ -17,13 +17,13 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (error !== null) {
       dispatch(openModalAction(ModalStatus.ERROR_ALERT));
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   const handleModalAdd = () => {
     dispatch(openModalAction(ModalStatus.ADD_CONTACT));

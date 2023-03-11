@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { addFilterAction } from "redux/filters/filters.slice";
-import { Box, Heading, Text, Input, Avatar } from "@chakra-ui/react";
+import { Box, Heading, Text, Input } from "@chakra-ui/react";
 import { ContactsList } from "components/ContactsList/ContactsList";
 
 export const Contacts = props => {

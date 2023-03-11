@@ -1,4 +1,4 @@
-import { createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const Url = {
   API_URL: "https://6408d0ca2f01352a8a9e3aff.mockapi.io/contacts",
