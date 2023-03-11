@@ -18,7 +18,7 @@ export const Contacts = props => {
   return (
     <Box boxShadow="base" p="10px" rounded="md">
       <Heading as="h2" mb="5px">
-        Phonebook
+        PhoneBook
       </Heading>
       <Text fontSize="md" fontWeight="700" mb="10px">
         Find contacts by name
