@@ -17,9 +17,11 @@ import { selectContacts, selectModal } from "redux/selector";
 import { addContacts } from "redux/phoneBook/phoneBook.thunk";
 import { ModalStatus } from "redux/constant";
 import { closeModalAction } from "redux/phoneBook/phoneBook.slice";
+
+
+
 export const AddContactModal = props => {
   const initialRef = useRef();
-
   const dispatch = useDispatch();
   const contact = useSelector(selectContacts);
   const modal = useSelector(selectModal);
@@ -28,8 +30,6 @@ export const AddContactModal = props => {
 
   const handleAdd = event => {
     event.preventDefault();
-    console.log(event.currentTarget);
-
     const {
       name: { value: text },
       number: { value: num },

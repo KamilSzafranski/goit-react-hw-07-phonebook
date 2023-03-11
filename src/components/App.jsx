@@ -44,7 +44,7 @@ export const App = () => {
           Add Contact
         </Button>
         <Contacts />
-        <DeleteAlert ids={"1"} />
+        <DeleteAlert />
         <ErrorAlert />
         <AddContactModal />
       </Box>

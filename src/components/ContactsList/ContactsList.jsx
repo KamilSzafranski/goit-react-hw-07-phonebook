@@ -1,7 +1,5 @@
 import React, { Fragment } from "react";
-
 import { useSelector } from "react-redux";
-
 import { selectFileredContacts, selectisLoding } from "redux/selector";
 import { Center, List, Spinner } from "@chakra-ui/react";
 import { ContactsItem } from "components/ContactsItem/ContacsItem";

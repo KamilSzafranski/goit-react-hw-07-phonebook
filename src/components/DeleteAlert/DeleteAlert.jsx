@@ -55,9 +55,3 @@ export const DeleteAlert = props => {
     </AlertDialog>
   );
 };
-
-DeleteAlert.prototypes = {
-  handleOpen: PropTypes.bool,
-  handleClose: PropTypes.func,
-  ids: PropTypes.string,
-};
