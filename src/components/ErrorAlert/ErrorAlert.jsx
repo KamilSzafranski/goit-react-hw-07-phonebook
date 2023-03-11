@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectError, selectModal } from "redux/selector";
 import PropTypes from "prop-types";
 import { ModalStatus } from "redux/constant";
-import { closeModal } from "redux/phoneBook/phoneBook.slice";
+import { closeModalAction } from "redux/phoneBook/phoneBook.slice";
 
 export const ErrorAlert = props => {
   const cancelRef = useRef();
@@ -23,7 +23,7 @@ export const ErrorAlert = props => {
 
   const handleRefresh = () => document.location.reload();
 
-  const handleCloseModal = () => dispatch(closeModal());
+  const handleCloseModal = () => dispatch(closeModalAction());
 
   return (
     <AlertDialog

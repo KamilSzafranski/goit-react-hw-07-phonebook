@@ -1,15 +1,12 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import { ModalStatus } from "redux/constant";
-import { getStorage } from "utils/utils";
+import { createSlice } from "@reduxjs/toolkit";
 import { addContacts, deleteContacts, fetchContacts } from "./phoneBook.thunk";
-import { useDisclosure } from "@chakra-ui/react";
 
 const phoneBookInitialState = {
   isLoading: false,
   error: null,
   contacts: [],
   modal: null,
+  idToDelete: null,
 };
 
 const handlePending = (state, action) => {
@@ -26,11 +23,14 @@ const phoneBookSlice = createSlice({
   name: "phoneBook",
   initialState: phoneBookInitialState,
   reducers: {
-    closeModal(state, action) {
+    closeModalAction(state, action) {
       state.modal = null;
     },
-    openModal(state, action) {
+    openModalAction(state, action) {
       state.modal = action.payload;
+    },
+    setIdToDeleteAction(state, action) {
+      state.idToDelete = action.payload;
     },
   },
   extraReducers: {
@@ -46,6 +46,7 @@ const phoneBookSlice = createSlice({
     },
     [deleteContacts.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.modal = null;
       const itemToDelete = state.contacts.findIndex(
         element => element.id === action.payload.id
       );
@@ -53,10 +54,12 @@ const phoneBookSlice = createSlice({
     },
     [addContacts.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.modal = null;
       state.contacts.push(action.payload);
     },
   },
 });
 
-export const { closeModal, openModal } = phoneBookSlice.actions;
+export const { closeModalAction, openModalAction, setIdToDeleteAction } =
+  phoneBookSlice.actions;
 export const phoneBookReducer = phoneBookSlice.reducer;

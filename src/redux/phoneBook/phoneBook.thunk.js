@@ -1,5 +1,4 @@
 import { createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 const Url = {
   API_URL: "https://6408d0ca2f01352a8a9e3aff.mockapi.io/contacts",
@@ -40,7 +39,7 @@ export const deleteContacts = createAsyncThunk(
 
 export const addContacts = createAsyncThunk(
   "phoneBook/addContacts",
-  async ({ text: name, num: phone, email }, thunkAPI) => {
+  async ({ text: name, num: phone, mail: email }, thunkAPI) => {
     try {
       const contactToAdd = {
         name,

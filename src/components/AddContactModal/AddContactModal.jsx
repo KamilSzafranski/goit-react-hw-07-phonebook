@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectContacts, selectModal } from "redux/selector";
 import { addContacts } from "redux/phoneBook/phoneBook.thunk";
 import { ModalStatus } from "redux/constant";
-import { closeModal } from "redux/phoneBook/phoneBook.slice";
+import { closeModalAction } from "redux/phoneBook/phoneBook.slice";
 export const AddContactModal = props => {
   const initialRef = useRef();
 
@@ -24,25 +24,25 @@ export const AddContactModal = props => {
   const contact = useSelector(selectContacts);
   const modal = useSelector(selectModal);
 
-  const handleCloseModal = () => dispatch(closeModal());
+  const handleCloseModal = () => dispatch(closeModalAction());
 
   const handleAdd = event => {
     event.preventDefault();
     console.log(event.currentTarget);
 
-    // const {
-    //   name: { value: text },
-    //   number: { value: num },
-    //   email: { value: mail },
-    // } = event.currentTarget.elements;
+    const {
+      name: { value: text },
+      number: { value: num },
+      email: { value: mail },
+    } = event.currentTarget.elements;
 
-    // const nameTaken = contact.some(elements => elements.name === text);
-    // const numberTaken = contact.some(elements => elements.phone === num);
-    // const emailTaken = contact.some(elements => elements.emai === email);
-    // if (nameTaken && numberTaken) {
-    //   return alert(`${text} is alredy in Phonebook`);
-    // }
-    // dispatch(addContacts({ text, num }));
+    const nameTaken = contact.some(elements => elements.name === text);
+    const numberTaken = contact.some(elements => elements.phone === num);
+    const emailTaken = contact.some(elements => elements.email === mail);
+    if (nameTaken && numberTaken && emailTaken) {
+      return alert(`${text} is alredy in Phonebook`);
+    }
+    dispatch(addContacts({ text, num, mail }));
   };
 
   return (
@@ -83,7 +83,7 @@ export const AddContactModal = props => {
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} type="submit" form="formId">
-            Save
+            Submit
           </Button>
           <Button onClick={handleCloseModal}>Cancel</Button>
         </ModalFooter>

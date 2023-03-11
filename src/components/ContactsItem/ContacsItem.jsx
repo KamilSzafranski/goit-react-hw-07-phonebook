@@ -3,18 +3,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { ListItem, Divider, Text, useDisclosure } from "@chakra-ui/react";
-import { DeleteAlert } from "components/DeleteAlert/DeleteAlert";
 import { useDispatch } from "react-redux";
+import {
+  openModalAction,
+  setIdToDeleteAction,
+} from "redux/phoneBook/phoneBook.slice";
+import { ModalStatus } from "redux/constant";
 
 export const ContactsItem = ({ name, number, id, email }) => {
+  const dispatch = useDispatch();
   const handleDelete = event => {
-    onOpen();
     event.preventDefault();
+    dispatch(setIdToDeleteAction(id));
+    dispatch(openModalAction(ModalStatus.DELETE_ALERT));
   };
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
-      <DeleteAlert ids={id} handleOpen={isOpen} handleClose={onClose} />
       <ListItem
         display="grid"
         h="50px"

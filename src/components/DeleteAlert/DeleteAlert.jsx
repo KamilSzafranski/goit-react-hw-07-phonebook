@@ -9,28 +9,33 @@ import {
 } from "@chakra-ui/react";
 
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
 
 import { deleteContacts } from "redux/phoneBook/phoneBook.thunk";
+import { selectIdToDelete, selectModal } from "redux/selector";
+import { ModalStatus } from "redux/constant";
+import { closeModalAction } from "redux/phoneBook/phoneBook.slice";
 
-export const DeleteAlert = ({ handleOpen, handleClose, ids }) => {
+export const DeleteAlert = props => {
   const cancelRef = useRef();
   const dispatch = useDispatch();
-
-  const handleDelete = () => dispatch(deleteContacts(ids));
+  const modal = useSelector(selectModal);
+  const id = useSelector(selectIdToDelete);
+  const handleDelete = () => dispatch(deleteContacts(id));
+  const handleClose = () => dispatch(closeModalAction());
 
   return (
     <AlertDialog
-      isOpen={handleOpen}
+      isOpen={modal === ModalStatus.DELETE_ALERT}
       leastDestructiveRef={cancelRef}
       onClose={handleClose}
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Delete Customer
+            Delete Contact
           </AlertDialogHeader>
 
           <AlertDialogBody>
